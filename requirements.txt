@@ -21,3 +21,4 @@ typing_extensions==4.7.1
 Werkzeug==2.3.7
 WTForms==3.0.1
 zipp==3.16.2
+gunicorn
