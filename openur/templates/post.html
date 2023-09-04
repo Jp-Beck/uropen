@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="content-wrapper" style="margin-top: 80px;">
+    <!-- justify the h1 heading to the center-->
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Flexbox container for each post */
+        .post-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Image styles */
+        .post-img {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        /* Container for text */
+        .text-container {
+            flex: 1;
+        }
+
+        .post-title {
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .post-author {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for buttons */
+        .btn {
+            margin-right: 10px;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-update {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+
+    <h1>Post by: {{post.author.username}}</h1>
+    <div class="post-card">
+        <img class="post-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="{{ post.title }}">
+        <div class="text-container">
+            <h2><a class="post-title">{{ post.title }}</a></h2>
+            <p class="post-author">By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+            <p>{{ post.content }}</p>
+            <!-- Update and Delete buttons -->
+            {% if current_user == post.author %}
+            <a href="{{ url_for('users.update_post', post_id=post.id)}}"><button class="btn btn-update">Update</button></a>
+            <!-- Create a form to send a POST request for deleting the post -->
+            <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-delete">Delete</button>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock body %}

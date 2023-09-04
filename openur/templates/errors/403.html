@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="static/github.svg" alt="The OpenUr Logo" width="72" height="57">
+    <h1 class="display-5 fw-bold text-body-emphasis">OpenUr Error</h1>
+    <div class="col-lg-6 mx-auto">
+      <h2 class="fw-normal text-danger">403 - You can not access here!</h2>
+      <p class="lead mb-4">You do not have the correct credentials to perform this action.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <!-- Keep the Download button in case users want to download the latest version -->
+        <a href="https://pypi.org/project/OpenUr/" class="btn btn-primary btn-lg px-4 gap-3">Download Latest Version</a>
+        <!-- Documentation button can direct users to potential solutions or updates regarding the error -->
+        <a href="https://jp-beck.github.io/learnur/OpenUr/" target="_blank" class="btn btn-outline-secondary btn-lg px-4">Documentation</a>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

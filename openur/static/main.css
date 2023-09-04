@@ -1,0 +1,126 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+.container.content {
+  flex: 1;
+  padding-top: 30px;  /* Adjust based on your navbar's height */
+}
+
+.content-spacing {
+  margin-top: 80px;
+}
+
+
+.footer-minimalist {
+  background-color: #343a40;
+  color: #ffffff;
+  height: 50px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.github-icon {
+  width: 30px;
+  height: 30px;
+}
+
+p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* This affects the database.html */
+
+.post-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  transition: transform .2s, box-shadow .2s; /* smooth hover effect */
+  max-width: 800px; /* You can adjust this as per your preference */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.post-author {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.content-wrapper {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* This affects the navbar.html */
+
+.nav-link {
+  transition: background-color 0.3s;  /* smooth transition for hover effect */
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);  /* subtle background color on hover */
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);  /* highlight the active link */
+  border-bottom: 2px solid #FFFFFF;  /* add underline to active link */
+}
+
+/* This affaects the register.html */
+
+.card.bg-dark {
+  border: 1px solid rgba(255, 255, 255, 0.1);  /* subtle border for the card */
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);  /* matching the input fields with the dark theme */
+  color: white;  /* text color for input fields */
+  border: 1px solid rgba(255, 255, 255, 0.2);  /* subtle border for input fields */
+}
+
+.form-control:focus {
+  border-color: #FFFFFF;  /* white border on focus */
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);  /* white shadow on focus */
+}
+
+.btn-light:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;  /* dark text on button hover */
+}
+
+
+.alert {
+  z-index: 1000; /* Adjust value as needed */
+  position: relative;
+}
+
+/* in main.css or whichever CSS file you're using */
+footer {
+  height: 100px;  /* or whatever height you prefer */
+}

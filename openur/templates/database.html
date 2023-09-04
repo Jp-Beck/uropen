@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="content-wrapper" style="margin-top: 80px;">
+    <!-- justify the h1 heading to the center-->
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Flexbox container for each post */
+        .post-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Image styles */
+        .post-img {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        /* Container for text */
+        .text-container {
+            flex: 1;
+        }
+
+        .post-title {
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .post-author {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;  /* Center items on the horizontal axis */
+            margin-top: 20px;         /* Add some margin at the top for spacing */
+        }
+
+        /* Margin between pagination links */
+        .pagination a {
+            margin-right: 5px;       /* Space between links */
+        }
+        .pagination span {
+            margin-right: 5px;       /* Space between ellipsis and other elements */
+        }
+
+    </style>
+    <h1>OpenUr - Forum</h1>
+    {% for post in posts.items %}
+    <div class="post-card">
+        <img class="post-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="{{ post.title }}">
+        <div class="text-container">
+            <h2><a class="post-title" href="{{ url_for('posts.post', post_id = post.id)}}">{{ post.title }}</a></h2>
+            <p class="post-author">By {{ post.author.username }} on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+            <p>{{ post.content }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- Pagination links -->
+    <div class="pagination">
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge = 1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class="btn btn-info mb-4" href="{{ url_for('main.database', page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('main.database', page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <span class="mb-4">...</span>
+            {% endif %}
+        {% endfor %}
+    </div>    
+</div>
+{% endblock body %}

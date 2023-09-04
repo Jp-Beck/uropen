@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+    /* Center the h1 heading */
+    .profile-header {
+        text-align: center;
+        margin-bottom: 50px;
+        margin-top: 80px;
+    }
+
+    /* Define the size and style for the profile image */
+    .account-img {
+        max-width: 150px; /* Limit the size */
+        border-radius: 50%; /* Make it circular */
+        display: block; /* Make it a block-level element */
+        margin: 15px auto; /* Reduced margin to reduce space */
+    }
+
+    /* Style the username as a heading */
+    .account-heading {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px; /* Reduced margin to reduce space */
+    }
+
+    /* Style the email */
+    .text-secondary {
+        color: #6c757d;
+        text-align: center;
+        margin-top: 10px; /* Reduced margin to reduce space */
+    }
+
+        /* Custom file input styling */
+    .custom-file-input::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+    .custom-file-input::before {
+        content: 'Select file';
+        display: inline-block;
+        background: #f0f0f0;
+        border: 1px solid #999;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+        text-align: center;
+        font-weight: 700;
+        color: #555;
+    }
+    .custom-file-input:hover::before {
+        border-color: black;
+    }
+</style>
+
+<div class="content-wrapper">
+    <div class="content-section">
+        <h3 class="account-heading">{{ current_user.username }}</h3>
+        <img class="account-img" src="{{ image_file }}" alt="{{ current_user.username }}'s profile picture">
+        <p class="text-secondary">{{ current_user.email }}</p>
+    </div>
+    
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card bg-dark text-light">
+                    <div class="card-header">
+                        <h3>Account Update</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST", enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                {{ form.username(class="form-control", placeholder="Enter username", id="username", required=true) }}
+                                {% for error in form.username.errors %}
+                                    <div class="alert alert-danger mt-2">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                {{ form.email(class="form-control", placeholder="Enter email", id="email", required=true) }}
+                                {% for error in form.email.errors %}
+                                    <div class="alert alert-danger mt-2">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="{{ form.picture.id }}">{{ form.picture.label.text }}</label>
+                                <div class="custom-file">
+                                    {{ form.picture(class="custom-file-input", id=form.picture.id) }}
+                                    <label class="custom-file-label" for="{{ form.picture.id }}"></label>
+                                </div>
+                                {% if form.picture.errors %}
+                                    {% for error in form.picture.errors %}
+                                        <div class="alert alert-danger mt-2">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>                            
+                            <button type="submit" class="btn btn-light">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

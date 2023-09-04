@@ -1,0 +1,55 @@
+<div class="container-fluid fixed-top bg-dark">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+    </div>
+
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{{ url_for('main.index') }}" class="nav-link px-2 text-light {% if request.endpoint == 'index' %}active{% endif %}">Home</a></li>
+        <!-- Note that we won't set the active class for Documentation since it's an external link -->
+        <li><a href="https://jp-beck.github.io/learnur/OpenUr/" target="_blank" class="nav-link px-2 text-light">Documentation</a></li>
+        <li><a href="{{ url_for('main.about') }}" class="nav-link px-2 text-light {% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
+        <!-- Assuming 'contact' is the endpoint for your contact page, if you ever make one -->
+        <li><a href="mailto:jp-beck@outlook.com?subject=OpenUr%3A%20Contact&body=%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF%E3%80%81%0D%0A%0D%0A%E7%B4%A0%E6%99%B4%E3%82%89%E3%81%97%E3%81%84OpenUr%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99%E3%80%81%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%82%92%E3%81%94%E9%A6%B3%E8%B5%B0%E3%81%95%E3%81%9B%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%24%0D%0A%0D%0A%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99%E3%80%81%0D%0A%0D%0A%E8%A6%AA%E5%88%87%E3%81%AA%E4%BA%BA%EF%BC%81%0D%0A%0D%0AHello%2C%0D%0A%0D%0AThanks%20for%20the%20awesome%20OpenUr%20package%2C%20let%20me%20buy%20you%20a%20coffee%20%24%0D%0A%0D%0ABest%20regards%2C%0D%0A%0D%0AKind%20person!%0D%0A" class="nav-link px-2 text-light {% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
+        <li><a href="{{ url_for('main.database') }}" class="nav-link px-2 text-light {% if request.endpoint == 'database' %}active{% endif %}">Database</a></li>
+
+    </ul>
+
+    <div class="col-md-3 text-end me-4">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('posts.new_post') }}" class="btn btn-outline-light me-2">New Post</a>
+        <a href="{{ url_for('users.profile') }}" class="btn btn-outline-light me-2">Profile</a>
+        <a href="{{ url_for('users.logout') }}" class="btn btn-outline-light me-2">Logout</a>
+      {% else %}
+        <a href="{{ url_for('users.login') }}" class="btn btn-outline-light me-2">Login</a>
+        <a href="{{ url_for('users.register') }}" class="btn btn-light">Sign-up</a>
+      {% endif %}
+    </div>  
+  </header>
+</div>
+<script>
+  let hasFocus = true;
+  
+  window.onblur = function() { 
+    hasFocus = false;
+  }
+  
+  document.querySelector(".mailto-link").addEventListener("click", function(e){
+      setTimeout(function(){
+          if(hasFocus && confirm("It seems you don't have a mail app. Would you like to copy the email address instead?")){
+              let tempInput = document.createElement("input");
+              document.body.appendChild(tempInput);
+              tempInput.value = 'jp-beck@outlook.com';
+              tempInput.select();
+              document.execCommand("copy");
+              document.body.removeChild(tempInput);
+              alert("Email address copied to clipboard!");
+          }
+      }, 2000);
+  });
+</script>
+  
+  
